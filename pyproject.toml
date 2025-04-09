@@ -9,5 +9,5 @@ dependencies = [
     "jupyter>=1.1.1",
     "marker-pdf>=1.6.2",
     "notebook>=7.3.3",
-    "streamlit>=1.44.1",
+    "pymupdf>=1.25.5",
 ]
