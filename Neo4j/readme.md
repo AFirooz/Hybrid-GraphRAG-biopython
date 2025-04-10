@@ -6,8 +6,8 @@
 
 ## Commands to remember
 
-- To create the docker container: `docker-compose up -d`
-- To open the Cypher terminal: `docker exec --interactive --tty neo4j_server cypher-shell -u neo4j -p`
+- To create the docker container: `sudo docker compose up -d`
+- To open the Cypher terminal: `sudo docker exec --interactive --tty neo4j_server cypher-shell -u neo4j`
 
 
 ## Notes
