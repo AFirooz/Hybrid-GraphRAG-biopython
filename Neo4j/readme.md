@@ -3,11 +3,20 @@
 
 > You can set it to your preference when setting up the `dot-secrets`. It must look like `neo4j/<YOUR_PASSWORD>`
 
+
+## Commands to remember
+
+- To create the docker container: `docker-compose up -d`
+- To open the Cypher terminal: `docker exec --interactive --tty neo4j_server cypher-shell -u neo4j -p`
+
+
 ## Notes
 
 - The APOC plugin is required to run the Graph Data Science plugin.
 
 - APOC stands for **Awesome Procedures On Cypher.**
+
+- Enabling `NEO4J_dbms_security_procedures_unrestricted=apoc.\\\*` is generally acceptable in development environment, but in production you need to limit these privileges to only the procedures you trust (by whitelisting a minimal set). Not enabling this, would constantly run into errors due to access permissions. The three backslashes are necessary to prevent wildcard expansions.
 
 - The `docker-compose.override.yml` is a way to modify the original `docker-compose.yml` at runtime. Used when some configurations need to be different based on the system running the container. For example when setting the memory limit between a laptop, desktop, or a production server.
 
@@ -18,7 +27,7 @@
 
 Neo4j uses separate memory pools for the **JVM heap** (which holds objects, query processing data, etc.) and the **page cache** (which holds on-disk data in memory for fast access). The heap size settings you’re adjusting (initial and max) are for the JVM heap, not the page cache. For optimal performance, you often need to set both appropriately.
 
-1. Set them to the same value
+1. Set the heap size (initial and max) to the same value.
 2. Start with 25–50% of the system's total memory (RAM).
 3. Monitor and adjust using tools like VisualVM or GC logs.
 
@@ -64,6 +73,7 @@ services:
     env_file:
       - ./../.secrets/.env
 ```
+
 
 ## Resources
 
