@@ -18,3 +18,8 @@ GEMINI_API_KEY = "OUR_API_KEY"  # from https://ai.dev
 # MongoDB Atlas
 # For additional help, see https://www.mongodb.com/docs/atlas/troubleshoot-connection/#special-characters-in-connection-string-password
 MONGODB_URI = "CONNECTION_STRING"  # from https://cloud.mongodb.com -> Clusters -> Connect -> Driver -> Python
+
+# Neo4j
+NEO4J_URI = "bolt://localhost:7687"  # for local via docker or native
+NEO4J_USERNAME = "neo4j"  # default username
+NEO4J_PASSWORD = "${file:.env-neo4j-auth}"  # import password from ".env-neo4j-auth" file
