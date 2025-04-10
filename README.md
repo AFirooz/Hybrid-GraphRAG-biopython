@@ -12,6 +12,7 @@ The AI Agent is designed to be grounded in documentation from:
 
 By integrating these resources into a graph database, the system aims to provide intelligent responses to complex queries about molecular dynamics simulations and protein visualization.
 
+
 ## Features
 
 - PDF document ingestion and processing using Marker-PDF
@@ -19,14 +20,20 @@ By integrating these resources into a graph database, the system aims to provide
 - RAG-enhanced responses using Gemini LLMs
 - Interactive query interface via Streamlit (or Gradio)
 
+
 ## Getting Started
 
-...
+0. You will need `docker`, `docker-compose`, ...
+1. Setup your secrets. For [more details ...](./dot-secrets/readme.md)
+2. Setup Neo4j database. For [more details ...](./Neo4j/readme.md).
+
 
 ## Project Structure
 
 - `/data/pdfs/` - Source documentation in PDF format
+- `/data/neo4j_db/` - The Neo4j graph database
 - `/src/` - Source code for the GraphRAG implementation
+
 
 ## License
 
