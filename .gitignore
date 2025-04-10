@@ -12,3 +12,8 @@ wheels/
 .secrets/*
 .env[-*]
 docker-compose.override.yml
+
+data/neo4j_db/logs/*
+data/neo4j_db/plugins/*
+data/neo4j_db/data/*
+data/neo4j_db/import/*
