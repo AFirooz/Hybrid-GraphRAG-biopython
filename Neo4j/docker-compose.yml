@@ -1,3 +1,5 @@
+# Run using: $ docker-compose up -d
+
 services:
   neo4j:
     container_name: neo4j
@@ -6,15 +8,20 @@ services:
       - 7474:7474
       - 7687:7687
     environment:
-      - NEO4J_AUTH=neo4j/${NEO4J_PASSWORD}
+      - NEO4J_AUTH_FILE=/run/secrets/neo4j_auth_file  # using Docker Secrets
       - NEO4J_apoc_export_file_enabled=true
       - NEO4J_apoc_import_file_enabled=true
       - NEO4J_apoc_import_file_use__neo4j__config=true
-      # Awesome Procedures on Cypher (APOC)
       - NEO4J_PLUGINS=["apoc", "graph-data-science"]
-    # volumes:
-    # todo
-    #   - ./neo4j_db/data:/data
-    #   - ./neo4j_db/logs:/logs
-    #   - ./neo4j_db/import:/var/lib/neo4j/import
-    #   - ./neo4j_db/plugins:/plugins
+    volumes:
+      - ./../data/neo4j_db/logs:/logs
+      - ./../data/neo4j_db/config:/config
+      - ./../data/neo4j_db/data:/data
+      - ./../data/neo4j_db/plugins:/plugins
+      - ./../data/neo4j_db/import:/var/lib/neo4j/import
+    secrets:
+      - neo4j_auth_file
+
+secrets:
+  neo4j_auth_file:
+    file: ./../.secrets/.env-neo4j-auth

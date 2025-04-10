@@ -1,0 +1,14 @@
+services:
+  neo4j:
+  
+    ## find latest at https://github.com/docker-library/official-images#architectures-other-than-amd64
+    ## M4 is actually ARM64V9
+    image: arm64v8/neo4j  # for M-series MacBooks.
+
+    environment:
+      - NEO4J_server_memory_heap_initial__size=6G
+      - NEO4J_server_memory_heap_max__size=6G
+      - NEO4J_dbms_security_auth_minimum_password_length=8  # todo: check if this works
+
+    restart: always # restart container if it stops. # todo: check if this works
+      
