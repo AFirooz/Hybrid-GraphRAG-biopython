@@ -10,3 +10,5 @@ wheels/
 .venv
 
 .secrets/*
+.env[-*]
+docker-compose.override.yml

@@ -1,6 +1,8 @@
 # This file will be used with dotenv package
 # See https://pypi.org/project/python-dotenv/ for more details
 
+### NOT ALL KEYS ARE REQUIRED ###
+
 # LangSmith API
 # https://smith.langchain.com
 LANGCHAIN_TRACING_V2 = "true"
@@ -9,6 +11,9 @@ LANGCHAIN_API_KEY = "YOUR_API_KEY"  # from https://smith.langchain.com
 
 # OpenAI API
 OPENAI_API_KEY = "YOUR_API_KEY"  # from https://platform.openai.com/api-keys
+
+# Google Gemini API
+GEMINI_API_KEY = "OUR_API_KEY"  # from https://ai.dev
 
 # MongoDB Atlas
 # For additional help, see https://www.mongodb.com/docs/atlas/troubleshoot-connection/#special-characters-in-connection-string-password
