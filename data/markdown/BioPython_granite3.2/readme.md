@@ -1,1 +1,0 @@
-Took 5.5 minuets for 5 pages.
