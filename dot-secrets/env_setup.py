@@ -4,6 +4,7 @@ import re
 import glob
 import shutil
 import tempfile
+import subprocess
 from pathlib import Path
 
 def setup_env_files():
@@ -53,21 +54,37 @@ def setup_env_files():
         
         with open(target_file, 'r') as f:
             for line in f:
-                # Find all ${file:...} patterns
-                matches = re.findall(r'\$\{file:([^}]+)\}', line)
+                # Find all ${file:...} patterns, possibly with shell commands
+                matches = re.findall(r'\$\{file:([^}|]+)(?:\s*\|\s*([^}]+))?\}', line)
                 
                 if matches:
                     for match in matches:
-                        ref_file = base_path / match.strip()
-                        print(f"  Found file reference: {match} -> ", end="")
+                        file_path, shell_cmd = match[0].strip(), match[1].strip() if len(match) > 1 and match[1] else None
+                        ref_file = base_path / file_path
+                        print(f"  Found file reference: {file_path} -> ", end="")
                         
                         if ref_file.exists():
                             # Read file content and remove trailing whitespace
                             with open(ref_file, 'r') as rf:
                                 file_content = rf.read().strip()
                             
+                            # Process content through shell command if present
+                            if shell_cmd:
+                                print("applying shell command -> ", end="")
+                                try:
+                                    # Create process with the file content as input
+                                    process = subprocess.run(
+                                        ["bash", "-c", shell_cmd], input=file_content, text=True, capture_output=True, check=True
+                                    )
+                                    file_content = process.stdout.strip()
+                                    print("processed -> ", end="")
+                                except subprocess.CalledProcessError as e:
+                                    print(f"Error: Command failed with {e.returncode}")
+                                    print(f"Error output: {e.stderr}")
+
                             # Replace ${file:...} with content
-                            line = line.replace(f"${{file:{match}}}", file_content)
+                            original_pattern = f"${{file:{file_path}}}" if not shell_cmd else f"${{file:{file_path} | {shell_cmd}}}"
+                            line = line.replace(original_pattern, file_content)
                             
                             print("Resolved")
                         else:
@@ -79,7 +96,7 @@ def setup_env_files():
         # Replace original with processed file
         shutil.move(temp_file.name, target_file)
     
-    print("\n\nEnvironment setup complete!")
+    print("\n>>> Environment setup complete! <<<")
 
 if __name__ == "__main__":
     setup_env_files()
