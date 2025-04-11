@@ -38,4 +38,4 @@ Essentially you will have to copy the `dot-secrets` to `.secrets` and any `dot-e
 - [MongoDB Atlas](https://cloud.mongodb.com) -> Clusters -> Connect -> Driver -> Python
 
   For additional help with connection strings, [see here](https://www.mongodb.com/docs/atlas/troubleshoot-connection/#special-characters-in-connection-string-password).
-- [Neo4j AuraDB](https://console.neo4j.io)
+- [Neo4j AuraDB](https://console.neo4j.io) and [here](# https://neo4j.com/docs/aura/classic/auradb/getting-started/create-database/) you can read how to create a database.

@@ -1,34 +1,26 @@
-# This file will be used with dotenv package
-# See https://pypi.org/project/python-dotenv/ for more details
-
 ### NOT ALL KEYS ARE REQUIRED ###
 
 # LangSmith API
-# https://smith.langchain.com
 LANGCHAIN_TRACING_V2 = "true"
 LANGCHAIN_ENDPOINT = "https://api.smith.langchain.com"
-LANGCHAIN_API_KEY = "YOUR_API_KEY"  # from https://smith.langchain.com
+LANGCHAIN_API_KEY = "YOUR_API_KEY"
 
 # OpenAI API
-OPENAI_API_KEY = "YOUR_API_KEY"  # from https://platform.openai.com/api-keys
+OPENAI_API_KEY = "YOUR_API_KEY"
 
 # Google Gemini API
-GEMINI_API_KEY = "OUR_API_KEY"  # from https://ai.dev
+GEMINI_API_KEY = "OUR_API_KEY"
 
 # MongoDB Atlas
-# For additional help, see https://www.mongodb.com/docs/atlas/troubleshoot-connection/#special-characters-in-connection-string-password
-MONGODB_URI = "CONNECTION_STRING"  # from https://cloud.mongodb.com -> Clusters -> Connect -> Driver -> Python
+MONGODB_URI = "CONNECTION_STRING"
 
 # Neo4j
 NEO4J_USERNAME = "neo4j"  # default username
 
-# Local
-NEO4J_URI = "bolt://localhost:7687"  # for local via docker or native
-NEO4J_PASSWORD = "${file:.env-docker-neo4j}"  # local
+## Neo4j - Local (Docker/Native)
+NEO4J_URI = "bolt://localhost:7687"
+NEO4J_PASSWORD = "${file:.env-docker-neo4j}"
 
-## Cloud
-# https://neo4j.com/docs/aura/classic/auradb/getting-started/create-database/
+## Neo4j - Cloud
 # NEO4J_URI = "neo4j+s://<Instance_ID>.databases.neo4j.io"
-# NEO4J_QUERY = "https://<Instance_ID>.databases.neo4j.io/db/{databaseName}/query/v2"
-# NEO4J_PASSWORD = "<Instance_Password>"  # cloud
-
+# NEO4J_PASSWORD = "<Instance_Password>"
