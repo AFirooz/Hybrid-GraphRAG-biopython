@@ -3,6 +3,8 @@
 # from pymongo.operations import SearchIndexModel
 import os
 from pathlib import Path
+from rapidfuzz import fuzz, utils
+from pprint import pprint
 
 
 def get_project_root() -> Path:
@@ -30,6 +32,62 @@ def get_project_root() -> Path:
             return root_dir
     else:
         raise Exception("No root directory was found that contains a .git directory")
+
+
+def fuzzy_find(file_path: Path, threshold:int=90):
+    """
+        Find a file using fuzzy matching if the exact path doesn't exist.
+
+        Usage:
+        ```python
+            file_path = (Path() / "vmd user guid.pdf").resolve()
+            file_path = find_file_fuzzy(file_path)
+        ```
+
+        Args:
+            file_path (Path): The expected file path
+            threshold (int): Minimum similarity score (0-100) to consider a match
+            extension (str): File extension to search for
+
+        Returns:
+            Path: The actual file path (original or best match)
+
+        Raises:
+            FileNotFoundError: If no suitable match is found
+    """
+    
+    if file_path.exists():
+        return file_path
+
+    extension=file_path.suffix
+    if not extension:
+        raise ValueError(f"File path '{file_path}' does not have a valid extension.")
+
+    print(f"File '{file_path.stem}' not found. Fuzzy Searching ...")
+
+    # Get all files with the specified extension in the directory
+    all_files = list(file_path.parent.glob(f"*{extension}"))
+    if not all_files:
+        raise FileNotFoundError(f"No {extension} files found in {file_path.parent}")
+
+    target_name = file_path.name
+    best_matches = dict()
+
+    for f in all_files:
+        score = fuzz.QRatio(target_name, f.name, processor=utils.default_process)
+        if score >= threshold:
+            best_matches[score] = f
+
+    if len(best_matches) == 0:
+        raise FileNotFoundError(f"File '{target_name}' not found in {file_path.parent}")
+
+    if len(best_matches) == 1:
+        return best_matches.pop(max(best_matches.keys()))
+    else:
+        print(f"Multiple matches found for '{target_name}':")
+        print("Score \t File")
+        pprint.pp(best_matches)
+        raise FileNotFoundError("Multiple matches found")
 
 
 # class AtlasClient:
