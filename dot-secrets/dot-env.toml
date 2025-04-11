@@ -22,4 +22,5 @@ MONGODB_URI = "CONNECTION_STRING"  # from https://cloud.mongodb.com -> Clusters 
 # Neo4j
 NEO4J_URI = "bolt://localhost:7687"  # for local via docker or native
 NEO4J_USERNAME = "neo4j"  # default username
-NEO4J_PASSWORD = "${file:.env-neo4j-auth | sed 's/^neo4j\///'}"  # import password from file and remove "neo4j/" prefix if present
+# import password from file and remove "neo4j/" prefix if present
+NEO4J_PASSWORD = "${file:.env-docker-neo4j | sed 's/.*\/\([^\"]*\)\".*/\1/'}"
