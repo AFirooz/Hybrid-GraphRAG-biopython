@@ -20,13 +20,15 @@ GEMINI_API_KEY = "OUR_API_KEY"  # from https://ai.dev
 MONGODB_URI = "CONNECTION_STRING"  # from https://cloud.mongodb.com -> Clusters -> Connect -> Driver -> Python
 
 # Neo4j
+NEO4J_USERNAME = "neo4j"  # default username
+
 # Local
 NEO4J_URI = "bolt://localhost:7687"  # for local via docker or native
+NEO4J_PASSWORD = "${file:.env-docker-neo4j}"  # local
 
 ## Cloud
 # https://neo4j.com/docs/aura/classic/auradb/getting-started/create-database/
-# NEO4J_URL = "neo4j+s://<Instance_ID>.databases.neo4j.io"
+# NEO4J_URI = "neo4j+s://<Instance_ID>.databases.neo4j.io"
 # NEO4J_QUERY = "https://<Instance_ID>.databases.neo4j.io/db/{databaseName}/query/v2"
+# NEO4J_PASSWORD = "<Instance_Password>"  # cloud
 
-NEO4J_USERNAME = "neo4j"  # default username
-NEO4J_PASSWORD = "${file:.env-docker-neo4j}"
