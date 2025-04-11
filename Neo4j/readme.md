@@ -17,7 +17,7 @@
 
 - APOC stands for **Awesome Procedures On Cypher.**
 
-- Enabling `NEO4J_dbms_security_procedures_unrestricted=apoc.\\\*` is generally acceptable in development environment, but in production you need to limit these privileges to only the procedures you trust (by whitelisting a minimal set). Not enabling this, would constantly run into errors due to access permissions. The three backslashes are necessary to prevent wildcard expansions.
+- Enabling `NEO4J_dbms_security_procedures_unrestricted=apoc.*` is generally acceptable in development environment, but in production you need to limit these privileges to only the procedures you trust (by whitelisting a minimal set). Not enabling this, would constantly run into errors due to access permissions. "The three backslashes `apoc.\\\*` are necessary to prevent wildcard expansions" was mentioned on the doc website, but my experiment proved otherwise.
 
 - The `docker-compose.override.yml` is a way to modify the original `docker-compose.yml` at runtime. Used when some configurations need to be different based on the system running the container. For example when setting the memory limit between a laptop, desktop, or a production server.
 
