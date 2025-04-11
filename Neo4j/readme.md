@@ -6,7 +6,8 @@
 
 ## Commands to remember
 
-- To create the docker container: `sudo docker compose up -d`
+- To create the docker container: `sudo docker compose up -d` in quite mode.
+- To create the docker container: `sudo docker compose up` more verbose.
 - To open the Cypher terminal: `sudo docker exec --interactive --tty neo4j_server cypher-shell -u neo4j`
 
 
@@ -32,11 +33,9 @@ Neo4j uses separate memory pools for the **JVM heap** (which holds objects, quer
 3. Monitor and adjust using tools like VisualVM or GC logs.
 
 
-## Use env files or docker secrets?
+## Using Docker Secrets?
 
-Docker Secrets are more secure and follows Docker's best practices, but using `.env` is simpler.
-
-### Using Docker Secrets
+Docker Secrets are secure and follows Docker's best practices, but requires **Docker Swarm** mode to be enabled, otherwise secrets won’t be mounted.
 
 Note that Secrets only support environment variables starting with `NEO4J_` and ending with `_FILE`.
 
@@ -56,22 +55,6 @@ services:
 secrets:
   neo4j_auth_file:
     file: ./../.secrets/neo4j_auth
-```
-
-### Using Environment File
-
-Note that this will load the `.env` directly into the docker container too!
-The `docker-compose.yml` will look like this:
-
-```yml
-services:
-  neo4j:
-    ...
-    environment:
-      - NEO4J_AUTH=${NEO4J_PASSWORD}  # uses the variable directly from .env
-      - ...
-    env_file:
-      - ./../.secrets/.env
 ```
 
 
