@@ -19,7 +19,7 @@ OPENAI_API_KEY = "YOUR_API_KEY"
 
 # ------------------------------
 # Google Gemini API
-GEMINI_API_KEY = "OUR_API_KEY"
+GOOGLE_API_KEY = "OUR_API_KEY"
 
 # ------------------------------
 # MongoDB Atlas
