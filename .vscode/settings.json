@@ -7,7 +7,8 @@
         "**/Thumbs.db": true,
         "**/.idea": true,
         "**/__pycache__": true,
-        "**/.venv": true
+        "**/.venv": true,
+        "**/*.crswap": true
     },
     "hide-files.files": []
 }
